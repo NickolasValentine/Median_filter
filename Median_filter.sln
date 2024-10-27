@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Median_filter", "Median_filter.vcxproj", "{583AC5EE-8DA9-40E5-952F-1CD5A038BD79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{583AC5EE-8DA9-40E5-952F-1CD5A038BD79}.Debug|x64.ActiveCfg = Debug|x64
+		{583AC5EE-8DA9-40E5-952F-1CD5A038BD79}.Debug|x64.Build.0 = Debug|x64
+		{583AC5EE-8DA9-40E5-952F-1CD5A038BD79}.Debug|x86.ActiveCfg = Debug|Win32
+		{583AC5EE-8DA9-40E5-952F-1CD5A038BD79}.Debug|x86.Build.0 = Debug|Win32
+		{583AC5EE-8DA9-40E5-952F-1CD5A038BD79}.Release|x64.ActiveCfg = Release|x64
+		{583AC5EE-8DA9-40E5-952F-1CD5A038BD79}.Release|x64.Build.0 = Release|x64
+		{583AC5EE-8DA9-40E5-952F-1CD5A038BD79}.Release|x86.ActiveCfg = Release|Win32
+		{583AC5EE-8DA9-40E5-952F-1CD5A038BD79}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9412B86-8502-4E4C-86A2-F3BBE0878C56}
+	EndGlobalSection
+EndGlobal
