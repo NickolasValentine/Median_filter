@@ -107,7 +107,7 @@ void keyListener() {
                 keepRunning = false;
             }
         }
-        this_thread::sleep_for(chrono::milliseconds(10)); // A small delay
+        this_thread::sleep_for(chrono::milliseconds(10)); //A small delay
     }
 }
 
