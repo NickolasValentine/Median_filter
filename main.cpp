@@ -7,7 +7,7 @@
 #include <thread>
 #include <atomic>
 #include <windows.h>
-#include <conio.h> // для _getch()
+#include <conio.h>
 
 using namespace cv;
 using namespace std;
@@ -18,6 +18,7 @@ atomic<bool> keepRunning(true);
 atomic<bool> restartRequested(false);
 static bool messageShown = false;
 
+// Noise reduction of the original image by 10%
 void addImpulseNoise(Mat& image) {
     int totalPixels = image.rows * image.cols;
     int noisyPixels = static_cast<int>(totalPixels * NOISE_PERCENTAGE);
@@ -30,6 +31,7 @@ void addImpulseNoise(Mat& image) {
     }
 }
 
+// Filtering a noisy image
 void applyHorizontalMedianFilter(const Mat& noisyImage, Mat& filteredImage) {
     for (int y = 0; y < noisyImage.rows; ++y) {
         for (int x = 2; x < noisyImage.cols - 2; ++x) {
@@ -43,6 +45,7 @@ void applyHorizontalMedianFilter(const Mat& noisyImage, Mat& filteredImage) {
     }
 }
 
+// Open explorer to select image
 string openFileDialog() {
     OPENFILENAMEA ofn;
     char filename[MAX_PATH];
@@ -74,7 +77,7 @@ string openFileDialog() {
 
 void clearKeyboardBuffer() {
     while (_kbhit()) {
-        _getch(); // Очищаем буфер клавиатуры
+        _getch(); // Clear the keyboard buffer
     }
 }
 
@@ -83,8 +86,7 @@ void displayImages(const Mat& image, const Mat& noisyImage, const Mat& filteredI
         imshow("Original Image", image);
         imshow("Noisy Image", noisyImage);
         imshow("Filtered Image", filteredImage);
-        waitKey(30);  // Для обновления окон
-        // Печать сообщения один раз после первого отображения изображений
+        waitKey(30);  // To update windows
         if (!messageShown) {
             cout << "Press Enter to select a new image, or ESC to exit." << endl;
             messageShown = true;
@@ -105,7 +107,7 @@ void keyListener() {
                 keepRunning = false;
             }
         }
-        this_thread::sleep_for(chrono::milliseconds(10)); // Небольшая задержка
+        this_thread::sleep_for(chrono::milliseconds(10)); // A small delay
     }
 }
 
@@ -133,30 +135,30 @@ int main() {
         Mat filteredImage = noisyImage.clone();
         applyHorizontalMedianFilter(noisyImage, filteredImage);
 
-        // Очищаем буфер клавиатуры перед запуском потоков
+        // Clear the keyboard buffer before starting threads
         clearKeyboardBuffer();
         messageShown = false;
 
-        // Устанавливаем флаг для запуска потоков
+        // Set the flag to start the threads
         keepRunning = true;
         restartRequested = false;
 
-        // Запускаем поток для отображения
+        // Start the thread for display
         thread displayThread(displayImages, image, noisyImage, filteredImage);
 
-        // Запускаем поток для отслеживания нажатий клавиш только после загрузки изображения
+        // Start a thread to track keypresses only after the image has loaded
         thread keyThread(keyListener);
 
-        // Ожидаем завершения потоков
+        // Wait for threads to complete
         displayThread.join();
         keyThread.join();
 
 
-        // Закрываем окна после завершения потоков
+        // Close windows after threads are finished
         destroyAllWindows();
 
         if (!restartRequested) {
-            break; // Выходим из главного цикла, если пользователь нажал ESC
+            break; // Exit the main loop if the user presses ESC
         }
     }
 
